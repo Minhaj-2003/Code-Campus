@@ -5,7 +5,7 @@ import { useClerk, UserButton, useUser } from "@clerk/clerk-react";
 import { AppContext } from "../../contex/AppContext";
 
 const Navbar = () => {
-  const { navigate } = useContext(AppContext);
+  const { navigate, isEducator } = useContext(AppContext);
 
   const isCourseListPage = location.pathname.includes("/course-list");
 
@@ -22,13 +22,13 @@ const Navbar = () => {
         onClick={() => navigate("/")}
         src={assets.logo}
         alt="Logo"
-        className="w-20 rounded-xl bg-transparent lg:w-32 cursor-pointer"
+        className="w-20 rounded-xl bg-transparent lg:w-62 cursor-pointer"
       />
       <div className="hidden md:flex items-center gap-5 text-gray-500">
         <div className="flex items-center gap-5">
           {user && (
             <>
-              <button>Become Educator</button> |
+              <button onClick={()=> {navigate("/educator")}}>{isEducator ? "Educator Dashboard" : "Become Educator" }</button>
               <Link to="/my-enrollments">My Enrollments</Link>
             </>
           )}
@@ -49,7 +49,7 @@ const Navbar = () => {
         <div className="flex items-center gap-1 sm:gap-2 max-sm:text-xs">
           {user && (
             <>
-              <button>Become Educator</button> |
+              <button onClick={()=> {navigate("/educator")}}>{isEducator ? "Educator Dashboard" : "Become Educator" }</button> 
               <Link to="/my-enrollments">My Enrollments</Link>
             </>
           )}
